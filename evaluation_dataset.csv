@@ -1,0 +1,12 @@
+
+question,ground_truth
+"What is retrieval-augmented generation (RAG)?","RAG combines information retrieval with language generation by retrieving relevant external information and using it as context for an LLM to generate an answer."
+"What are the main stages of a RAG pipeline?","A RAG pipeline retrieves relevant information, augments the prompt or context with the retrieved information, and generates an answer using a language model."
+"Why are documents split into smaller chunks?","Chunking breaks long documents into manageable pieces so relevant passages can be retrieved efficiently and supplied to the language model."
+"What are embeddings in a RAG system?","Embeddings are numerical vector representations of text chunks that capture semantic information and support similarity-based retrieval."
+"How does a vector database help a RAG system?","A vector database stores vector representations of document chunks and supports similarity searches to retrieve relevant information."
+"How are documents encoded into vectors during indexing?","An embedding model transforms each document chunk into a numerical vector, which is stored in a vector database for later retrieval."
+"How does similarity search retrieve relevant document chunks?","The system embeds the user's query, compares it with stored chunk vectors, and retrieves the top-ranked chunks based on similarity."
+"What is the role of the retrieval stage?","The retrieval stage searches the knowledge base and selects document passages relevant to the user's question."
+"What is the role of the generation stage?","The generation stage provides the original question and retrieved context to a language model, which generates a response."
+"What is faithfulness in RAG evaluation?","Faithfulness measures whether the generated answer is supported by the retrieved context."

@@ -1,0 +1,39 @@
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Jupyter temporary files
+.ipynb_checkpoints/
+
+# Local vector database and generated indexes
+chroma_db/
+vectorstore/
+.chroma/
+
+# Logs and temporary files
+*.log
+.DS_Store
+Thumbs.db
+
+
+# Generated evaluation output
+evaluation_results.json
+
+# Local editor settings
+.vscode/
+
+
+# Source documents (keep local unless redistribution is permitted)
+documents/
