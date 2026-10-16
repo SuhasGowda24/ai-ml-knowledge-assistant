@@ -1,4 +1,4 @@
-# 🤖 AI & Machine Learning Knowledge Assistant
+# 🤖 DocuMind AI: RAG-Based Document Question Answering System
 
 An AI-powered document question-answering application that uses **Retrieval-Augmented Generation (RAG)** to answer questions from research PDFs using retrieved document context.
 

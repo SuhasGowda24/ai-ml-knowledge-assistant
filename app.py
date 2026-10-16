@@ -6,7 +6,7 @@ from rag_pipeline import create_rag_components, ask_question
 
 # ---------------------------------------------------------------- Page config
 st.set_page_config(
-    page_title="AI & ML Knowledge Assistant",
+    page_title="DocuMind AI",
     page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -70,8 +70,10 @@ st.markdown(
 st.markdown(
     """
     <div class="hero">
-        <h1>🤖 AI & Machine Learning Knowledge Assistant</h1>
-        <p>Ask questions and get answers grounded in your research PDFs, with page-level sources.</p>
+        <h1>✦ DocuMind AI</h1>
+        <p>RAG-Based Document Question Answering System</p>
+        <p>Explore your research PDFs, get context-grounded answers,
+        and verify information with page-level sources.</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -121,7 +123,7 @@ def render_entry(entry):
 
 
 def export_chat():
-    lines = ["# AI & ML Knowledge Assistant: Chat Export\n"]
+    lines = ["# DocuMind AI: Chat Export\n"]
     for e in st.session_state.history:
         lines.append(f"## Q: {e['question']}\n")
         lines.append(f"{e['answer']}\n")
@@ -133,7 +135,7 @@ def export_chat():
 
 # ---------------------------------------------------------------- Sidebar
 with st.sidebar:
-    st.header("⚙️ Control Panel")
+    st.header("✦ DocuMind AI")
     st.caption("Powered by RAG · ChromaDB · Groq")
 
     st.subheader("💡 Try an example")
