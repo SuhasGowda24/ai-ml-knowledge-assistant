@@ -35,6 +35,6 @@ evaluation_results.json
 .vscode/
 
 
-# Source documents (keep local unless redistribution is permitted)
+# Source documents: include PDFs, exclude other local files
 documents/*
-!documents/README.md
+!documents/*.pdf
