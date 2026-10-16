@@ -1,0 +1,512 @@
+[
+  {
+    "question": "What is retrieval-augmented generation (RAG)?",
+    "answer": "Retrieval‑augmented generation (RAG) is an architecture that combines the generative abilities of large language models with a separate information‑retrieval step that pulls relevant content from external databases or documents, so the model can produce answers that are more accurate, up‑to‑date, and grounded in factual sources.",
+    "contexts": [
+      "https://www.deepset.ai/blog/rag-evaluation-retrieval, 2023.\n[163] Q. Leng, K. Uhlenhuth, and A. Polyzotis, “Best practices for\nllm evaluation of rag applications,” https://www.databricks.com/blog/\nLLM-auto-eval-best-practices-RAG, 2023.\n[164] S. Es, J. James, L. Espinosa-Anke, and S. Schockaert, “Ragas: Au-\ntomated evaluation of retrieval augmented generation,” arXiv preprint\narXiv:2309.15217, 2023.\n[165] J. Saad-Falcon, O. Khattab, C. Potts, and M. Zaharia, “Ares: An\nautomated evaluation framework for retrieval-augmented generation\nsystems,” arXiv preprint arXiv:2311.09476 , 2023.\n[166] C. Jarvis and J. Allard, “A survey of techniques for\nmaximizing llm performance,” https://community.openai.\ncom/t/openai-dev-day-2023-breakout-sessions/505213#\na-survey-of-techniques-for-maximizing-llm-performance-2, 2023.\n[167] J. Chen, H. Lin, X. Han, and L. Sun, “Benchmarking large lan-\nguage models in retrieval-augmented generation,” arXiv preprint\narXiv:2309.01431, 2023.",
+      "This section introduces a structured guide for developing Retrieval Augmented\nGeneration (RAG) systems, focusing on two distinct approaches:using OpenAI’s\nAssistant API (GPT Series) and an open-source Large Language Model (LLM)\nLlama and thus divided into two subsections[4.2.1][4.2.2]. The objective is to\nequip developers with the knowledge and practical steps necessary to implement\nRAG systems effectively, while highlighting common mistakes and best practices\nat each stage of the process. Each subsection is designed to provide practical\ninsights into setup, development, integration, customization and optimization to\ngenerate well-grounded and aligned outputs.\nIn addition to the two primary approaches discussed in this guide there are\nseveral alternative frameworks and methodologies for developing Retrieval Aug-\nmented Generation (RAG) systems. Each of these options such as Cohere, AI21’s\nJurassic-2, Google’s PaLM, and Meta’s OPT have their merits and trade-offs in",
+      "Developing Retrieval Augmented Generation\n(RAG) based LLM Systems from PDFs: An\nExperience Report\nAyman Asad Khan\nTampere University\nayman.khan@tuni.fi\nMd T oufique Hasan\nTampere University\nmdtoufique.hasan@tuni.fi\nKai Kristian Kemell\nTampere University\nkai-kristian.kemell@tuni.fi\nJussi Rasku\nTampere University\njussi.rasku@tuni.fi\nPekka Abrahamsson\nTampere University\npekka.abrahamsson@tuni.fi\nAbstract. This paper presents an experience report on the develop-\nment of Retrieval Augmented Generation (RAG) systems using PDF\ndocuments as the primary data source. The RAG architecture combines\ngenerative capabilities of Large Language Models (LLMs) with the preci-\nsion of information retrieval. This approach has the potential to redefine\nhow we interact with and augment both structured and unstructured\nknowledge in generative models to enhance transparency, accuracy and\ncontextuality of responses. The paper details the end-to-end pipeline,",
+      "of “Retrieval”, “Generation” and “Augmentation”, and\ndelve into their synergies, elucidating how these com-\nponents intricately collaborate to form a cohesive and\neffective RAG framework.\n• We have summarized the current assessment methods of\nRAG, covering 26 tasks, nearly 50 datasets, outlining\nthe evaluation objectives and metrics, as well as the\ncurrent evaluation benchmarks and tools. Additionally,\nwe anticipate future directions for RAG, emphasizing\npotential enhancements to tackle current challenges.\nThe paper unfolds as follows: Section II introduces the\nmain concept and current paradigms of RAG. The following\nthree sections explore core components—“Retrieval”, “Gen-\neration” and “Augmentation”, respectively. Section III focuses\non optimization methods in retrieval,including indexing, query\nand embedding optimization. Section IV concentrates on post-\nretrieval process and LLM fine-tuning in generation. Section V\nanalyzes the three augmentation processes. Section VI focuses",
+      "retrieval-generation synergy,” arXiv preprint arXiv:2305.15294 , 2023.\n[15] X. Wang, Q. Yang, Y . Qiu, J. Liang, Q. He, Z. Gu, Y . Xiao,\nand W. Wang, “Knowledgpt: Enhancing large language models with\nretrieval and storage access on knowledge bases,” arXiv preprint\narXiv:2308.11761, 2023.\n[16] A. H. Raudaschl, “Forget rag, the future\nis rag-fusion,” https://towardsdatascience.com/\nforget-rag-the-future-is-rag-fusion-1147298d8ad1, 2023.\n[17] X. Cheng, D. Luo, X. Chen, L. Liu, D. Zhao, and R. Yan, “Lift\nyourself up: Retrieval-augmented text generation with self memory,”\narXiv preprint arXiv:2305.02437 , 2023.\n[18] S. Wang, Y . Xu, Y . Fang, Y . Liu, S. Sun, R. Xu, C. Zhu, and\nM. Zeng, “Training data is more valuable than you think: A simple\nand effective method by retrieving from training data,” arXiv preprint\narXiv:2203.08773, 2022.\n[19] X. Li, E. Nie, and S. Liang, “From classification to generation:\nInsights into crosslingual retrieval augmented icl,” arXiv preprint",
+      "1\nRetrieval-Augmented Generation for Large\nLanguage Models: A Survey\nYunfan Gaoa, Yun Xiong b, Xinyu Gao b, Kangxiang Jia b, Jinliu Pan b, Yuxi Bi c, Yi Dai a, Jiawei Sun a, Meng\nWangc, and Haofen Wang a,c\naShanghai Research Institute for Intelligent Autonomous Systems, Tongji University\nbShanghai Key Laboratory of Data Science, School of Computer Science, Fudan University\ncCollege of Design and Innovation, Tongji University\nAbstract—Large Language Models (LLMs) showcase impres-\nsive capabilities but encounter challenges like hallucination,\noutdated knowledge, and non-transparent, untraceable reasoning\nprocesses. Retrieval-Augmented Generation (RAG) has emerged\nas a promising solution by incorporating knowledge from external\ndatabases. This enhances the accuracy and credibility of the\ngeneration, particularly for knowledge-intensive tasks, and allows\nfor continuous knowledge updates and integration of domain-\nspecific information. RAG synergistically merges LLMs’ intrin-",
+      "for retrieval augmented generation,” arXiv preprint arXiv:2312.05708 ,\n2023.\n[42] G. Izacard, P. Lewis, M. Lomeli, L. Hosseini, F. Petroni, T. Schick,\nJ. Dwivedi-Yu, A. Joulin, S. Riedel, and E. Grave, “Few-shot\nlearning with retrieval augmented language models,” arXiv preprint\narXiv:2208.03299, 2022.\n[43] J. Huang, W. Ping, P. Xu, M. Shoeybi, K. C.-C. Chang, and B. Catan-\nzaro, “Raven: In-context learning with retrieval augmented encoder-\ndecoder language models,” arXiv preprint arXiv:2308.07922 , 2023.",
+      "the robustness of subsequent answer generation by offering\nadditional contextual references through multiple retrieval\niterations. However, it may be affected by semantic discon-\ntinuity and the accumulation of irrelevant information. ITER-\nRETGEN [14] employs a synergistic approach that lever-\nages “retrieval-enhanced generation” alongside “generation-\nenhanced retrieval” for tasks that necessitate the reproduction\nof specific information. The model harnesses the content\nrequired to address the input task as a contextual basis for\nretrieving pertinent knowledge, which in turn facilitates the\ngeneration of improved responses in subsequent iterations.\nB. Recursive Retrieval\nRecursive retrieval is often used in information retrieval and\nNLP to improve the depth and relevance of search results.\nThe process involves iteratively refining search queries based\non the results obtained from previous searches. Recursive\nRetrieval aims to enhance the search experience by gradu-"
+    ],
+    "ground_truth": "RAG combines information retrieval with language generation by retrieving relevant external information and using it as context for an LLM to generate an answer.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.9950939173063272,
+    "sources": [
+      {
+        "source": "rag_survey.pdf",
+        "page": 20
+      },
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 12
+      },
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 1
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 2
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 17
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 1
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 17
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 11
+      }
+    ]
+  },
+  {
+    "question": "What are the main stages of a RAG pipeline?",
+    "answer": "The main stages of a RAG pipeline are retrieval, generation, and augmentation (typically preceded by a data‑collection step to build the knowledge base). These three components form the core of the RAG process, where relevant documents are retrieved, the language model generates an answer using both its internal knowledge and the retrieved information, and any additional augmentation (e.g., prompt construction or post‑processing) refines the final output.",
+    "contexts": [
+      "customization to suit specific requirements such as demand control, flexibility,\nand cost-efficiency. This combination makes these two options highly valuable\nfor diverse RAG system development needs.\n12",
+      "could clarify its broader trajectory. This survey endeavors to\nfill this gap by mapping out the RAG process and charting\nits evolution and anticipated future paths, with a focus on the\nintegration of RAG within LLMs. This paper considers both\ntechnical paradigms and research methods, summarizing three\nmain research paradigms from over 100 RAG studies, and\nanalyzing key technologies in the core stages of “Retrieval,”\n“Generation,” and “Augmentation.” On the other hand, current\nresearch tends to focus more on methods, lacking analysis and\nsummarization of how to evaluate RAG. This paper compre-\nhensively reviews the downstream tasks, datasets, benchmarks,\nand evaluation methods applicable to RAG. Overall, this\npaper sets out to meticulously compile and categorize the\nfoundational technical concepts, historical progression, and\nthe spectrum of RAG methodologies and applications that\nhave emerged post-LLMs. It is designed to equip readers and",
+      "trated in the Fig[1]. Unlike static models which generate responses based only\non closed-world knowledge, the RAG process is structured into the following key\nsteps:\n1. Data Collection:\nThe workflow begins with the acquisition of relevant, domain specific textual\ndata from various external sources, such as PDFs, structured documents, or\ntext files. These documents represent raw data important for building a tai-\nlored knowledge base that the system will query during the retrieval process\n2",
+      "A series of benchmark tests and tools have been proposed\nto facilitate the evaluation of RAG.These instruments furnish\nquantitative metrics that not only gauge RAG model perfor-\nmance but also enhance comprehension of the model’s capabil-\nities across various evaluation aspects. Prominent benchmarks\nsuch as RGB, RECALL and CRUD [167]–[169] focus on\nappraising the essential abilities of RAG models. Concur-\nrently, state-of-the-art automated tools like RAGAS [164],\nARES [165], and TruLens 8 employ LLMs to adjudicate the\nquality scores. These tools and benchmarks collectively form\na robust framework for the systematic evaluation of RAG\nmodels, as summarized in Table IV.\nVII. D ISCUSSION AND FUTURE PROSPECTS\nDespite the considerable progress in RAG technology, sev-\neral challenges persist that warrant in-depth research.This\nchapter will mainly introduce the current challenges and future\nresearch directions faced by RAG.\nA. RAG vs Long Context",
+      "to the user’s query. These articles, combined with the original\nquestion, form a comprehensive prompt that empowers LLMs\nto generate a well-informed answer.\nThe RAG research paradigm is continuously evolving, and\nwe categorize it into three stages: Naive RAG, Advanced\nRAG, and Modular RAG, as showed in Figure 3. Despite\nRAG method are cost-effective and surpass the performance\nof the native LLM, they also exhibit several limitations.\nThe development of Advanced RAG and Modular RAG is\na response to these specific shortcomings in Naive RAG.\nA. Naive RAG\nThe Naive RAG research paradigm represents the earli-\nest methodology, which gained prominence shortly after the",
+      "The design also incorporates the feedback from a diverse group of partici-\npants during a workshop session, which focused on the practical aspects of imple-\nmenting RAG systems. Their input highlighted the effectiveness of the system’s\nreal-time retrieval capabilities, particularly in knowledge-intensive domains, and\nunderscored the importance of refining the integration between retrieval and\ngeneration to enhance the transparency and reliability of the system’s outputs.\nThis design sets the foundation for a RAG system capable of addressing the\nneeds of domains requiring precise, up-to-date information.\n4 Results: Step-by-Step Guide to RAG\n4.1 Setting Up the Environment\nThis section walks you through the steps required to set up a development\nenvironment for Retrieval Augmented Generation (RAG) on your local machine.\nWe will cover the installation of Python, setting up a virtual environment and\nconfiguring an IDE (VSCode).",
+      "generation, particularly for knowledge-intensive tasks, and allows\nfor continuous knowledge updates and integration of domain-\nspecific information. RAG synergistically merges LLMs’ intrin-\nsic knowledge with the vast, dynamic repositories of external\ndatabases. This comprehensive review paper offers a detailed\nexamination of the progression of RAG paradigms, encompassing\nthe Naive RAG, the Advanced RAG, and the Modular RAG.\nIt meticulously scrutinizes the tripartite foundation of RAG\nframeworks, which includes the retrieval, the generation and the\naugmentation techniques. The paper highlights the state-of-the-\nart technologies embedded in each of these critical components,\nproviding a profound understanding of the advancements in RAG\nsystems. Furthermore, this paper introduces up-to-date evalua-\ntion framework and benchmark. At the end, this article delineates\nthe challenges currently faced and points out prospective avenues\nfor research and development 1.",
+      "language generation models, highlighting the need for further\nresearch and exploration into the robustness of RAG.\nC. Hybrid Approaches\nCombining RAG with fine-tuning is emerging as a leading\nstrategy. Determining the optimal integration of RAG and\nfine-tuning whether sequential, alternating, or through end-to-\nend joint training—and how to harness both parameterized"
+    ],
+    "ground_truth": "A RAG pipeline retrieves relevant information, augments the prompt or context with the retrieved information, and generates an answer using a language model.",
+    "faithfulness": 0.8333333333333334,
+    "answer_relevancy": 0.9999999999999997,
+    "sources": [
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 12
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 1
+      },
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 2
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 14
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 2
+      },
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 10
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 1
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 14
+      }
+    ]
+  },
+  {
+    "question": "Why are documents split into smaller chunks?",
+    "answer": "Documents are split into smaller chunks to make retrieval more effective and to fit the input limits of language models. Large blocks of text are hard for retrieval models to process, can introduce noise, and may exceed token constraints, whereas smaller, semantically coherent pieces allow efficient similarity searches, preserve relevant context, and improve the accuracy of the retrieved information.",
+    "contexts": [
+      "2. Effective Chunking for Retrieval:\nPDF documents often contain large blocks of text, which can be challenging for\nretrieval models to handle effectively. Chunking the text into smaller, contextu-\nally coherent pieces can improve retrieval performance.\n– Semantic Chunking: Instead of splitting text arbitrarily, use semantic\nchunking based on logical divisions within the text, such as paragraphs or\nsections. This ensures that each chunk retains its context, which is important\nfor both retrieval accuracy and relevance.\n– Dynamic Chunk Sizing: Adjust the chunk size according to the content\ntype and the model’s input limitations. For example, scientific documents\nmight be chunked by sections, while other types of documents could use\nparagraphs as the primary chunking unit.\n3. Preprocessing and Cleaning:\nPreprocessing the extracted text is key for removing noise that could affect the\nperformance of both retrieval and generative models. Proper cleaning ensures",
+      "and Sentence pairs [38]. Detailed information is illustrated in\nTable I.\nB. Indexing Optimization\nIn the Indexing phase, documents will be processed, seg-\nmented, and transformed into Embeddings to be stored in a\nvector database. The quality of index construction determines\nwhether the correct context can be obtained in the retrieval\nphase.\n1) Chunking Strategy: The most common method is to split\nthe document into chunks on a fixed number of tokens (e.g.,\n100, 256, 512) [88]. Larger chunks can capture more context,\nbut they also generate more noise, requiring longer processing\ntime and higher costs. While smaller chunks may not fully\nconvey the necessary context, they do have less noise. How-\never, chunks leads to truncation within sentences, prompting\nthe optimization of a recursive splits and sliding window meth-\nods, enabling layered retrieval by merging globally related\ninformation across multiple retrieval processes [89]. Never-",
+      "the optimization of a recursive splits and sliding window meth-\nods, enabling layered retrieval by merging globally related\ninformation across multiple retrieval processes [89]. Never-\ntheless, these approaches still cannot strike a balance between\nsemantic completeness and context length. Therefore, methods\nlike Small2Big have been proposed, where sentences (small)\nare used as the retrieval unit, and the preceding and following\nsentences are provided as (big) context to LLMs [90].\n2) Metadata Attachments: Chunks can be enriched with\nmetadata information such as page number, file name, au-\nthor,category timestamp. Subsequently, retrieval can be filtered\nbased on this metadata, limiting the scope of the retrieval.\nAssigning different weights to document timestamps during\nretrieval can achieve time-aware RAG, ensuring the freshness\nof knowledge and avoiding outdated information.\nIn addition to extracting metadata from the original doc-",
+      "In developing the system, several challenges are addressed, such as managing\ncomplex PDF layouts (e.g., multi-column formats, embedded images) and main-\ntaining retrieval efficiency as the knowledge base grows. These challenges were\nhighlighted during a preliminary evaluation process, where participants pointed\nout the difficulty of handling documents with irregular structures. Feedback from\nthe evaluation also emphasized the need for improvements in text extraction and\nchunking to ensure coherent retrieval.\n9",
+      "tends to only focus on the beginning and end of long texts,\nwhile forgetting the middle portion. Therefore, in the RAG\nsystem, we typically need to further process the retrieved\ncontent.\n1) Reranking: Reranking fundamentally reorders document\nchunks to highlight the most pertinent results first, effectively\nreducing the overall document pool, severing a dual purpose\nin information retrieval, acting as both an enhancer and a\nfilter, delivering refined inputs for more precise language\nmodel processing [70]. Reranking can be performed using\nrule-based methods that depend on predefined metrics like\nDiversity, Relevance, and MRR, or model-based approaches\nlike Encoder-Decoder models from the BERT series (e.g.,\nSpanBERT), specialized reranking models such as Cohere\nrerank or bge-raranker-large, and general large language mod-\nels like GPT [12], [99].\n2) Context Selection/Compression: A common misconcep-\ntion in the RAG process is the belief that retrieving as many",
+      "RAG-Robust [48] Wikipedia Text Chunk Tuning Once\nRA-Long-Form [49] Dataset-base Text Chunk Tuning Once\nCoN [50] Wikipedia Text Chunk Tuning Once\nSelf-RAG [25] Wikipedia Text Chunk Tuning Adaptive\nBGM [26] Wikipedia Text Chunk Inference Once\nCoQ [51] Wikipedia Text Chunk Inference Iterative\nToken-Elimination [52] Wikipedia Text Chunk Inference Once\nPaperQA [53] Arxiv,Online Database,PubMed Text Chunk Inference Iterative\nNoiseRAG [54] FactoidWiki Text Chunk Inference Once\nIAG [55] Search Engine,Wikipedia Text Chunk Inference Once\nNoMIRACL [56] Wikipedia Text Chunk Inference Once\nToC [57] Search Engine,Wikipedia Text Chunk Inference Recursive\nSKR [58] Dataset-base,Wikipedia Text Chunk Inference Adaptive\nITRG [59] Wikipedia Text Chunk Inference Iterative\nRAG-LongContext [60] Dataset-base Text Chunk Inference Once\nITER-RETGEN [14] Wikipedia Text Chunk Inference Iterative\nIRCoT [61] Wikipedia Text Chunk Inference Recursive\nLLM-Knowledge-Boundary [62] Wikipedia Text Chunk Inference Once",
+      "expedite the retrieval and processing of pertinent data.\nHierarchical index structure . File are arranged in parent-\nchild relationships, with chunks linked to them. Data sum-\nmaries are stored at each node, aiding in the swift traversal\nof data and assisting the RAG system in determining which\nchunks to extract. This approach can also mitigate the illusion\ncaused by block extraction issues.\nKnowledge Graph index . Utilize KG in constructing the\nhierarchical structure of documents contributes to maintaining\nconsistency. It delineates the connections between different\nconcepts and entities, markedly reducing the potential for\nillusions. Another advantage is the transformation of the\ninformation retrieval process into instructions that LLM can\ncomprehend, thereby enhancing the accuracy of knowledge\nretrieval and enabling LLM to generate contextually coherent\nresponses, thus improving the overall efficiency of the RAG\nsystem. To capture the logical relationship between document",
+      "accommodate the context limitations of language models, text\nis segmented into smaller, digestible chunks. Chunks are then\nencoded into vector representations using an embedding model\nand stored in vector database. This step is crucial for enabling\nefficient similarity searches in the subsequent retrieval phase.\nRetrieval. Upon receipt of a user query, the RAG system\nemploys the same encoding model utilized during the indexing\nphase to transform the query into a vector representation.\nIt then computes the similarity scores between the query\nvector and the vector of chunks within the indexed corpus.\nThe system prioritizes and retrieves the top K chunks that\ndemonstrate the greatest similarity to the query. These chunks\nare subsequently used as the expanded context in prompt.\nGeneration. The posed query and selected documents are\nsynthesized into a coherent prompt to which a large language\nmodel is tasked with formulating a response. The model’s"
+    ],
+    "ground_truth": "Chunking breaks long documents into manageable pieces so relevant passages can be retrieved efficiently and supplied to the language model.",
+    "faithfulness": 0.875,
+    "answer_relevancy": 0.9044714436886078,
+    "sources": [
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 8
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 8
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 8
+      },
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 9
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 10
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 6
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 8
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 3
+      }
+    ]
+  },
+  {
+    "question": "What are embeddings in a RAG system?",
+    "answer": "Embeddings in a Retrieval‑Augmented Generation (RAG) system are vector representations of text chunks—produced by an embedding model—that capture their semantic meaning so the retriever can match a query to the most relevant chunks based on similarity.",
+    "contexts": [
+      "foundational technical concepts, historical progression, and\nthe spectrum of RAG methodologies and applications that\nhave emerged post-LLMs. It is designed to equip readers and\nprofessionals with a detailed and structured understanding of\nboth large models and RAG. It aims to illuminate the evolution\nof retrieval augmentation techniques, assess the strengths and\nweaknesses of various approaches in their respective contexts,\nand speculate on upcoming trends and innovations.\nOur contributions are as follows:\n• In this survey, we present a thorough and systematic\nreview of the state-of-the-art RAG methods, delineating\nits evolution through paradigms including naive RAG,\narXiv:2312.10997v5  [cs.CL]  27 Mar 2024",
+      "2\nFig. 1. Technology tree of RAG research. The stages of involving RAG mainly include pre-training, fine-tuning, and inference. With the emergence of LLMs,\nresearch on RAG initially focused on leveraging the powerful in context learning abilities of LLMs, primarily concentrating on the inference stage. Subsequent\nresearch has delved deeper, gradually integrating more with the fine-tuning of LLMs. Researchers have also been exploring ways to enhance language models\nin the pre-training stage through retrieval-augmented techniques.\nadvanced RAG, and modular RAG. This review contex-\ntualizes the broader scope of RAG research within the\nlandscape of LLMs.\n• We identify and discuss the central technologies integral\nto the RAG process, specifically focusing on the aspects\nof “Retrieval”, “Generation” and “Augmentation”, and\ndelve into their synergies, elucidating how these com-\nponents intricately collaborate to form a cohesive and\neffective RAG framework.",
+      "used to evaluate answer quality [26], [32], [52], [78]. Tools\nlike RALLE, designed for the automatic evaluation of RAG\napplications, similarly base their assessments on these task-\nspecific metrics [160]. Despite this, there is a notable paucity\nof research dedicated to evaluating the distinct characteristics\nof RAG models.The main evaluation objectives include:\nRetrieval Quality. Evaluating the retrieval quality is crucial\nfor determining the effectiveness of the context sourced by\nthe retriever component. Standard metrics from the domains\nof search engines, recommendation systems, and information\nretrieval systems are employed to measure the performance of\nthe RAG retrieval module. Metrics such as Hit Rate, MRR, and\nNDCG are commonly utilized for this purpose [161], [162].\nGeneration Quality . The assessment of generation quality\ncenters on the generator’s capacity to synthesize coherent and\nrelevant answers from the retrieved context. This evaluation",
+      "could clarify its broader trajectory. This survey endeavors to\nfill this gap by mapping out the RAG process and charting\nits evolution and anticipated future paths, with a focus on the\nintegration of RAG within LLMs. This paper considers both\ntechnical paradigms and research methods, summarizing three\nmain research paradigms from over 100 RAG studies, and\nanalyzing key technologies in the core stages of “Retrieval,”\n“Generation,” and “Augmentation.” On the other hand, current\nresearch tends to focus more on methods, lacking analysis and\nsummarization of how to evaluate RAG. This paper compre-\nhensively reviews the downstream tasks, datasets, benchmarks,\nand evaluation methods applicable to RAG. Overall, this\npaper sets out to meticulously compile and categorize the\nfoundational technical concepts, historical progression, and\nthe spectrum of RAG methodologies and applications that\nhave emerged post-LLMs. It is designed to equip readers and",
+      "3\nFig. 2. A representative instance of the RAG process applied to question answering. It mainly consists of 3 steps. 1) Indexing. Documents are split into chunks,\nencoded into vectors, and stored in a vector database. 2) Retrieval. Retrieve the Top k chunks most relevant to the question based on semantic similarity. 3)\nGeneration. Input the original question and the retrieved chunks together into LLM to generate the final answer.\nwidespread adoption of ChatGPT. The Naive RAG follows\na traditional process that includes indexing, retrieval, and\ngeneration, which is also characterized as a “Retrieve-Read”\nframework [7].\nIndexing starts with the cleaning and extraction of raw data\nin diverse formats like PDF, HTML, Word, and Markdown,\nwhich is then converted into a uniform plain text format. To\naccommodate the context limitations of language models, text\nis segmented into smaller, digestible chunks. Chunks are then\nencoded into vector representations using an embedding model",
+      "trated in the Fig[1]. Unlike static models which generate responses based only\non closed-world knowledge, the RAG process is structured into the following key\nsteps:\n1. Data Collection:\nThe workflow begins with the acquisition of relevant, domain specific textual\ndata from various external sources, such as PDFs, structured documents, or\ntext files. These documents represent raw data important for building a tai-\nlored knowledge base that the system will query during the retrieval process\n2",
+      "handling complex PDFs and extracting useful text. It also looks at the options\navailable, with examples of using proprietary APIs like OpenAI’s GPT and, as\nan alternative, open-source models like Llama 3.1, helping developers choose the\nbest tools for their needs.\nBy following the recommendations in this guide, developers can avoid com-\nmon mistakes and ensure their RAG systems retrieve relevant information and\ngenerate accurate, fact-based responses. As technology advances in adaptive\nlearning, multi-modal capabilities, and retrieval methods, RAG systems will play\na key role in industries like healthcare, legal research, and technical documen-\ntation. This guide offers a solid foundation for optimizing RAG systems and\nextending the potential of generative AI in practical applications.\n34",
+      "large amount of context at once will significantly impact its\ninference speed, while chunked retrieval and on-demand input\ncan significantly improve operational efficiency. On the other\nhand, RAG-based generation can quickly locate the original\nreferences for LLMs to help users verify the generated an-\nswers. The entire retrieval and reasoning process is observable,\nwhile generation solely relying on long context remains a\nblack box. Conversely, the expansion of context provides new\nopportunities for the development of RAG, enabling it to\naddress more complex problems and integrative or summary\nquestions that require reading a large amount of material to\nanswer [49]. Developing new RAG methods in the context of\nsuper-long contexts is one of the future research trends.\nB. RAG Robustness\nThe presence of noise or contradictory information during\nretrieval can detrimentally affect RAG’s output quality. This\nsituation is figuratively referred to as “Misinformation can"
+    ],
+    "ground_truth": "Embeddings are numerical vector representations of text chunks that capture semantic information and support similarity-based retrieval.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.6935607248121175,
+    "sources": [
+      {
+        "source": "rag_survey.pdf",
+        "page": 1
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 2
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 12
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 1
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 3
+      },
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 2
+      },
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 34
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 14
+      }
+    ]
+  },
+  {
+    "question": "How does a vector database help a RAG system?",
+    "answer": "A vector database stores the embedding vectors of document chunks so the RAG system can quickly perform similarity searches and retrieve the most relevant pieces of text for a given query. By indexing these vectors, the retriever can efficiently match a query’s embedding against the stored embeddings, select the top‑K similar chunks, and supply them as context for the generation step.",
+    "contexts": [
+      "could clarify its broader trajectory. This survey endeavors to\nfill this gap by mapping out the RAG process and charting\nits evolution and anticipated future paths, with a focus on the\nintegration of RAG within LLMs. This paper considers both\ntechnical paradigms and research methods, summarizing three\nmain research paradigms from over 100 RAG studies, and\nanalyzing key technologies in the core stages of “Retrieval,”\n“Generation,” and “Augmentation.” On the other hand, current\nresearch tends to focus more on methods, lacking analysis and\nsummarization of how to evaluate RAG. This paper compre-\nhensively reviews the downstream tasks, datasets, benchmarks,\nand evaluation methods applicable to RAG. Overall, this\npaper sets out to meticulously compile and categorize the\nfoundational technical concepts, historical progression, and\nthe spectrum of RAG methodologies and applications that\nhave emerged post-LLMs. It is designed to equip readers and",
+      "foundational technical concepts, historical progression, and\nthe spectrum of RAG methodologies and applications that\nhave emerged post-LLMs. It is designed to equip readers and\nprofessionals with a detailed and structured understanding of\nboth large models and RAG. It aims to illuminate the evolution\nof retrieval augmentation techniques, assess the strengths and\nweaknesses of various approaches in their respective contexts,\nand speculate on upcoming trends and innovations.\nOur contributions are as follows:\n• In this survey, we present a thorough and systematic\nreview of the state-of-the-art RAG methods, delineating\nits evolution through paradigms including naive RAG,\narXiv:2312.10997v5  [cs.CL]  27 Mar 2024",
+      "images or audio). Recent advancements in tools and technologies have further\naccelerated the development and deployment of RAG models. As RAG models\ncontinue to evolve, several emerging trends are shaping the future of this field.\n1. Haystack: An open-source framework that integrates dense and sparse re-\ntrieval methods with large-scale language models. Haystack supports real-\ntime search applications and can be used to develop RAG models that per-\nform tasks such as document retrieval, question answering, and summariza-\ntion [4].\n2. Elasticsearch with V ector Search: Enhanced support for dense vector\nsearch capabilities, allowing RAG models to perform more sophisticated re-\ntrieval tasks. Elasticsearch’s integration with frameworks like Faiss enables\n33",
+      "used to evaluate answer quality [26], [32], [52], [78]. Tools\nlike RALLE, designed for the automatic evaluation of RAG\napplications, similarly base their assessments on these task-\nspecific metrics [160]. Despite this, there is a notable paucity\nof research dedicated to evaluating the distinct characteristics\nof RAG models.The main evaluation objectives include:\nRetrieval Quality. Evaluating the retrieval quality is crucial\nfor determining the effectiveness of the context sourced by\nthe retriever component. Standard metrics from the domains\nof search engines, recommendation systems, and information\nretrieval systems are employed to measure the performance of\nthe RAG retrieval module. Metrics such as Hit Rate, MRR, and\nNDCG are commonly utilized for this purpose [161], [162].\nGeneration Quality . The assessment of generation quality\ncenters on the generator’s capacity to synthesize coherent and\nrelevant answers from the retrieved context. This evaluation",
+      "4\nFig. 3. Comparison between the three paradigms of RAG. (Left) Naive RAG mainly consists of three parts: indexing, retrieval and generation. (Middle)\nAdvanced RAG proposes multiple optimization strategies around pre-retrieval and post-retrieval, with a process similar to the Naive RAG, still following a\nchain-like structure. (Right) Modular RAG inherits and develops from the previous paradigm, showcasing greater flexibility overall. This is evident in the\nintroduction of multiple specific functional modules and the replacement of existing modules. The overall process is not limited to sequential retrieval and\ngeneration; it includes methods such as iterative and adaptive retrieval.\nPre-retrieval process. In this stage, the primary focus is\non optimizing the indexing structure and the original query.\nThe goal of optimizing indexing is to enhance the quality of\nthe content being indexed. This involves strategies: enhancing\ndata granularity, optimizing index structures, adding metadata,",
+      "ing the system to perform similarity searches. The vector representations are\nstored in a V ector Store, an indexed database optimized for fast retrieval\nbased on similarity measures.\n4. Retrieval of Relevant Content:\nWhen a Query is input into the system, it is first transformed into a vec-\ntor embedding, similar to the documents in the vector store. The Retriever\ncomponent then performs a search within the vector store to identify and\nretrieve the most relevant chunks of information related to the query. This\nretrieval process ensures that the system uses the most pertinent and up-to-\n3",
+      "accommodate the context limitations of language models, text\nis segmented into smaller, digestible chunks. Chunks are then\nencoded into vector representations using an embedding model\nand stored in vector database. This step is crucial for enabling\nefficient similarity searches in the subsequent retrieval phase.\nRetrieval. Upon receipt of a user query, the RAG system\nemploys the same encoding model utilized during the indexing\nphase to transform the query into a vector representation.\nIt then computes the similarity scores between the query\nvector and the vector of chunks within the indexed corpus.\nThe system prioritizes and retrieves the top K chunks that\ndemonstrate the greatest similarity to the query. These chunks\nare subsequently used as the expanded context in prompt.\nGeneration. The posed query and selected documents are\nsynthesized into a coherent prompt to which a large language\nmodel is tasked with formulating a response. The model’s",
+      "a key strategy. This concept has been implemented in frame-\nworks such as LlamaIndex 2, LangChain3, and HayStack [12].\nFeeding all relevant documents directly into LLMs can lead\nto information overload, diluting the focus on key details with\nirrelevant content.To mitigate this, post-retrieval efforts con-\ncentrate on selecting the essential information, emphasizing\ncritical sections, and shortening the context to be processed.\n2https://www.llamaindex.ai\n3https://www.langchain.com/\nC. Modular RAG\nThe modular RAG architecture advances beyond the for-\nmer two RAG paradigms, offering enhanced adaptability and\nversatility. It incorporates diverse strategies for improving its\ncomponents, such as adding a search module for similarity\nsearches and refining the retriever through fine-tuning. Inno-\nvations like restructured RAG modules [13] and rearranged\nRAG pipelines [14] have been introduced to tackle specific\nchallenges. The shift towards a modular RAG approach is"
+    ],
+    "ground_truth": "A vector database stores vector representations of document chunks and supports similarity searches to retrieve relevant information.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.8850866440861217,
+    "sources": [
+      {
+        "source": "rag_survey.pdf",
+        "page": 1
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 1
+      },
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 33
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 12
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 4
+      },
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 3
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 3
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 4
+      }
+    ]
+  },
+  {
+    "question": "How are documents encoded into vectors during indexing?",
+    "answer": "During indexing, each document is first split into smaller text chunks, and then each chunk is passed through an embedding model that converts the text into a vector representation; these vectors are stored in a vector database for later similarity search.",
+    "contexts": [
+      "ing the system to perform similarity searches. The vector representations are\nstored in a V ector Store, an indexed database optimized for fast retrieval\nbased on similarity measures.\n4. Retrieval of Relevant Content:\nWhen a Query is input into the system, it is first transformed into a vec-\ntor embedding, similar to the documents in the vector store. The Retriever\ncomponent then performs a search within the vector store to identify and\nretrieve the most relevant chunks of information related to the query. This\nretrieval process ensures that the system uses the most pertinent and up-to-\n3",
+      "accommodate the context limitations of language models, text\nis segmented into smaller, digestible chunks. Chunks are then\nencoded into vector representations using an embedding model\nand stored in vector database. This step is crucial for enabling\nefficient similarity searches in the subsequent retrieval phase.\nRetrieval. Upon receipt of a user query, the RAG system\nemploys the same encoding model utilized during the indexing\nphase to transform the query into a vector representation.\nIt then computes the similarity scores between the query\nvector and the vector of chunks within the indexed corpus.\nThe system prioritizes and retrieves the top K chunks that\ndemonstrate the greatest similarity to the query. These chunks\nare subsequently used as the expanded context in prompt.\nGeneration. The posed query and selected documents are\nsynthesized into a coherent prompt to which a large language\nmodel is tasked with formulating a response. The model’s",
+      "and Sentence pairs [38]. Detailed information is illustrated in\nTable I.\nB. Indexing Optimization\nIn the Indexing phase, documents will be processed, seg-\nmented, and transformed into Embeddings to be stored in a\nvector database. The quality of index construction determines\nwhether the correct context can be obtained in the retrieval\nphase.\n1) Chunking Strategy: The most common method is to split\nthe document into chunks on a fixed number of tokens (e.g.,\n100, 256, 512) [88]. Larger chunks can capture more context,\nbut they also generate more noise, requiring longer processing\ntime and higher costs. While smaller chunks may not fully\nconvey the necessary context, they do have less noise. How-\never, chunks leads to truncation within sentences, prompting\nthe optimization of a recursive splits and sliding window meth-\nods, enabling layered retrieval by merging globally related\ninformation across multiple retrieval processes [89]. Never-",
+      "The goal of optimizing indexing is to enhance the quality of\nthe content being indexed. This involves strategies: enhancing\ndata granularity, optimizing index structures, adding metadata,\nalignment optimization, and mixed retrieval. While the goal\nof query optimization is to make the user’s original question\nclearer and more suitable for the retrieval task. Common\nmethods include query rewriting query transformation, query\nexpansion and other techniques [7], [9]–[11].\nPost-Retrieval Process. Once relevant context is retrieved,\nit’s crucial to integrate it effectively with the query. The main\nmethods in post-retrieval process include rerank chunks and\ncontext compressing. Re-ranking the retrieved information to\nrelocate the most relevant content to the edges of the prompt is\na key strategy. This concept has been implemented in frame-\nworks such as LlamaIndex 2, LangChain3, and HayStack [12].\nFeeding all relevant documents directly into LLMs can lead",
+      "retrieval and enabling LLM to generate contextually coherent\nresponses, thus improving the overall efficiency of the RAG\nsystem. To capture the logical relationship between document\ncontent and structure, KGP [91] proposed a method of building\nan index between multiple documents using KG. This KG\nconsists of nodes (representing paragraphs or structures in the\ndocuments, such as pages and tables) and edges (indicating\nsemantic/lexical similarity between paragraphs or relationships\nwithin the document structure), effectively addressing knowl-\nedge retrieval and reasoning problems in a multi-document\nenvironment.\nC. Query Optimization\nOne of the primary challenges with Naive RAG is its\ndirect reliance on the user’s original query as the basis for\nretrieval. Formulating a precise and clear question is difficult,\nand imprudent queries result in subpar retrieval effectiveness.\nSometimes, the question itself is complex, and the language",
+      "expedite the retrieval and processing of pertinent data.\nHierarchical index structure . File are arranged in parent-\nchild relationships, with chunks linked to them. Data sum-\nmaries are stored at each node, aiding in the swift traversal\nof data and assisting the RAG system in determining which\nchunks to extract. This approach can also mitigate the illusion\ncaused by block extraction issues.\nKnowledge Graph index . Utilize KG in constructing the\nhierarchical structure of documents contributes to maintaining\nconsistency. It delineates the connections between different\nconcepts and entities, markedly reducing the potential for\nillusions. Another advantage is the transformation of the\ninformation retrieval process into instructions that LLM can\ncomprehend, thereby enhancing the accuracy of knowledge\nretrieval and enabling LLM to generate contextually coherent\nresponses, thus improving the overall efficiency of the RAG\nsystem. To capture the logical relationship between document",
+      "3\nFig. 2. A representative instance of the RAG process applied to question answering. It mainly consists of 3 steps. 1) Indexing. Documents are split into chunks,\nencoded into vectors, and stored in a vector database. 2) Retrieval. Retrieve the Top k chunks most relevant to the question based on semantic similarity. 3)\nGeneration. Input the original question and the retrieved chunks together into LLM to generate the final answer.\nwidespread adoption of ChatGPT. The Naive RAG follows\na traditional process that includes indexing, retrieval, and\ngeneration, which is also characterized as a “Retrieve-Read”\nframework [7].\nIndexing starts with the cleaning and extraction of raw data\nin diverse formats like PDF, HTML, Word, and Markdown,\nwhich is then converted into a uniform plain text format. To\naccommodate the context limitations of language models, text\nis segmented into smaller, digestible chunks. Chunks are then\nencoded into vector representations using an embedding model",
+      "retrieval can achieve time-aware RAG, ensuring the freshness\nof knowledge and avoiding outdated information.\nIn addition to extracting metadata from the original doc-\numents, metadata can also be artificially constructed. For\nexample, adding summaries of paragraph, as well as intro-\nducing hypothetical questions. This method is also known as\nReverse HyDE. Specifically, using LLM to generate questions\nthat can be answered by the document, then calculating the\nsimilarity between the original question and the hypothetical\nquestion during retrieval to reduce the semantic gap between\nthe question and the answer.\n3) Structural Index: One effective method for enhancing\ninformation retrieval is to establish a hierarchical structure for\nthe documents. By constructing In structure, RAG system can\nexpedite the retrieval and processing of pertinent data.\nHierarchical index structure . File are arranged in parent-\nchild relationships, with chunks linked to them. Data sum-"
+    ],
+    "ground_truth": "An embedding model transforms each document chunk into a numerical vector, which is stored in a vector database for later retrieval.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.6861778822135144,
+    "sources": [
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 3
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 3
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 8
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 4
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 8
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 8
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 3
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 8
+      }
+    ]
+  },
+  {
+    "question": "How does similarity search retrieve relevant document chunks?",
+    "answer": "Similarity search retrieves relevant document chunks by first converting the user’s query and each stored chunk into vector embeddings with the same embedding model, then comparing these vectors to compute similarity scores and selecting the top‑scoring chunks. The vectors are kept in a vector database (or vector store) that is indexed for fast similarity lookup, so the retriever can efficiently rank all chunks and return the K chunks with the highest similarity to the query as the relevant context.",
+    "contexts": [
+      "accommodate the context limitations of language models, text\nis segmented into smaller, digestible chunks. Chunks are then\nencoded into vector representations using an embedding model\nand stored in vector database. This step is crucial for enabling\nefficient similarity searches in the subsequent retrieval phase.\nRetrieval. Upon receipt of a user query, the RAG system\nemploys the same encoding model utilized during the indexing\nphase to transform the query into a vector representation.\nIt then computes the similarity scores between the query\nvector and the vector of chunks within the indexed corpus.\nThe system prioritizes and retrieves the top K chunks that\ndemonstrate the greatest similarity to the query. These chunks\nare subsequently used as the expanded context in prompt.\nGeneration. The posed query and selected documents are\nsynthesized into a coherent prompt to which a large language\nmodel is tasked with formulating a response. The model’s",
+      "The goal of optimizing indexing is to enhance the quality of\nthe content being indexed. This involves strategies: enhancing\ndata granularity, optimizing index structures, adding metadata,\nalignment optimization, and mixed retrieval. While the goal\nof query optimization is to make the user’s original question\nclearer and more suitable for the retrieval task. Common\nmethods include query rewriting query transformation, query\nexpansion and other techniques [7], [9]–[11].\nPost-Retrieval Process. Once relevant context is retrieved,\nit’s crucial to integrate it effectively with the query. The main\nmethods in post-retrieval process include rerank chunks and\ncontext compressing. Re-ranking the retrieved information to\nrelocate the most relevant content to the edges of the prompt is\na key strategy. This concept has been implemented in frame-\nworks such as LlamaIndex 2, LangChain3, and HayStack [12].\nFeeding all relevant documents directly into LLMs can lead",
+      "retrieval and enabling LLM to generate contextually coherent\nresponses, thus improving the overall efficiency of the RAG\nsystem. To capture the logical relationship between document\ncontent and structure, KGP [91] proposed a method of building\nan index between multiple documents using KG. This KG\nconsists of nodes (representing paragraphs or structures in the\ndocuments, such as pages and tables) and edges (indicating\nsemantic/lexical similarity between paragraphs or relationships\nwithin the document structure), effectively addressing knowl-\nedge retrieval and reasoning problems in a multi-document\nenvironment.\nC. Query Optimization\nOne of the primary challenges with Naive RAG is its\ndirect reliance on the user’s original query as the basis for\nretrieval. Formulating a precise and clear question is difficult,\nand imprudent queries result in subpar retrieval effectiveness.\nSometimes, the question itself is complex, and the language",
+      "retrieval can achieve time-aware RAG, ensuring the freshness\nof knowledge and avoiding outdated information.\nIn addition to extracting metadata from the original doc-\numents, metadata can also be artificially constructed. For\nexample, adding summaries of paragraph, as well as intro-\nducing hypothetical questions. This method is also known as\nReverse HyDE. Specifically, using LLM to generate questions\nthat can be answered by the document, then calculating the\nsimilarity between the original question and the hypothetical\nquestion during retrieval to reduce the semantic gap between\nthe question and the answer.\n3) Structural Index: One effective method for enhancing\ninformation retrieval is to establish a hierarchical structure for\nthe documents. By constructing In structure, RAG system can\nexpedite the retrieval and processing of pertinent data.\nHierarchical index structure . File are arranged in parent-\nchild relationships, with chunks linked to them. Data sum-",
+      "and Sentence pairs [38]. Detailed information is illustrated in\nTable I.\nB. Indexing Optimization\nIn the Indexing phase, documents will be processed, seg-\nmented, and transformed into Embeddings to be stored in a\nvector database. The quality of index construction determines\nwhether the correct context can be obtained in the retrieval\nphase.\n1) Chunking Strategy: The most common method is to split\nthe document into chunks on a fixed number of tokens (e.g.,\n100, 256, 512) [88]. Larger chunks can capture more context,\nbut they also generate more noise, requiring longer processing\ntime and higher costs. While smaller chunks may not fully\nconvey the necessary context, they do have less noise. How-\never, chunks leads to truncation within sentences, prompting\nthe optimization of a recursive splits and sliding window meth-\nods, enabling layered retrieval by merging globally related\ninformation across multiple retrieval processes [89]. Never-",
+      "ing the system to perform similarity searches. The vector representations are\nstored in a V ector Store, an indexed database optimized for fast retrieval\nbased on similarity measures.\n4. Retrieval of Relevant Content:\nWhen a Query is input into the system, it is first transformed into a vec-\ntor embedding, similar to the documents in the vector store. The Retriever\ncomponent then performs a search within the vector store to identify and\nretrieve the most relevant chunks of information related to the query. This\nretrieval process ensures that the system uses the most pertinent and up-to-\n3",
+      "2. Effective Chunking for Retrieval:\nPDF documents often contain large blocks of text, which can be challenging for\nretrieval models to handle effectively. Chunking the text into smaller, contextu-\nally coherent pieces can improve retrieval performance.\n– Semantic Chunking: Instead of splitting text arbitrarily, use semantic\nchunking based on logical divisions within the text, such as paragraphs or\nsections. This ensures that each chunk retains its context, which is important\nfor both retrieval accuracy and relevance.\n– Dynamic Chunk Sizing: Adjust the chunk size according to the content\ntype and the model’s input limitations. For example, scientific documents\nmight be chunked by sections, while other types of documents could use\nparagraphs as the primary chunking unit.\n3. Preprocessing and Cleaning:\nPreprocessing the extracted text is key for removing noise that could affect the\nperformance of both retrieval and generative models. Proper cleaning ensures",
+      "tends to only focus on the beginning and end of long texts,\nwhile forgetting the middle portion. Therefore, in the RAG\nsystem, we typically need to further process the retrieved\ncontent.\n1) Reranking: Reranking fundamentally reorders document\nchunks to highlight the most pertinent results first, effectively\nreducing the overall document pool, severing a dual purpose\nin information retrieval, acting as both an enhancer and a\nfilter, delivering refined inputs for more precise language\nmodel processing [70]. Reranking can be performed using\nrule-based methods that depend on predefined metrics like\nDiversity, Relevance, and MRR, or model-based approaches\nlike Encoder-Decoder models from the BERT series (e.g.,\nSpanBERT), specialized reranking models such as Cohere\nrerank or bge-raranker-large, and general large language mod-\nels like GPT [12], [99].\n2) Context Selection/Compression: A common misconcep-\ntion in the RAG process is the belief that retrieving as many"
+    ],
+    "ground_truth": "The system embeds the user's query, compares it with stored chunk vectors, and retrieves the top-ranked chunks based on similarity.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.9999999999999579,
+    "sources": [
+      {
+        "source": "rag_survey.pdf",
+        "page": 3
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 4
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 8
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 8
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 8
+      },
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 3
+      },
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 8
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 10
+      }
+    ]
+  },
+  {
+    "question": "What is the role of the retrieval stage?",
+    "answer": "The retrieval stage’s role is to fetch relevant external information (e.g., documents, passages, or knowledge‑base entries) that can be combined with the user’s query to supply the language model with the factual context needed for accurate and comprehensive answer generation.",
+    "contexts": [
+      "they may also contain redundant content, which could distract\nthe retriever and language models in downstream tasks [50],\n[87]. On the other hand, fine-grained retrieval unit granularity\nincreases the burden of retrieval and does not guarantee seman-\ntic integrity and meeting the required knowledge. Choosing",
+      "as it provides a limited scope of information [105]. Many\nstudies have optimized the retrieval process in response to this\nissue, and we have summarised them in Figure 5.\nA. Iterative Retrieval\nIterative retrieval is a process where the knowledge base\nis repeatedly searched based on the initial query and the text\ngenerated so far, providing a more comprehensive knowledge",
+      "improved satisfaction with the search outcomes.\nTo address specific data scenarios, recursive retrieval and\nmulti-hop retrieval techniques are utilized together. Recursive\nretrieval involves a structured index to process and retrieve\ndata in a hierarchical manner, which may include summarizing\nsections of a document or lengthy PDF before performing a\nretrieval based on this summary. Subsequently, a secondary\nretrieval within the document refines the search, embodying\nthe recursive nature of the process. In contrast, multi-hop\nretrieval is designed to delve deeper into graph-structured data\nsources, extracting interconnected information [106].\nC. Adaptive Retrieval\nAdaptive retrieval methods, exemplified by Flare [24] and\nSelf-RAG [25], refine the RAG framework by enabling LLMs\nto actively determine the optimal moments and content for\nretrieval, thus enhancing the efficiency and relevance of the\ninformation sourced.\nThese methods are part of a broader trend wherein",
+      "The process involves iteratively refining search queries based\non the results obtained from previous searches. Recursive\nRetrieval aims to enhance the search experience by gradu-\nally converging on the most pertinent information through a\nfeedback loop. IRCoT [61] uses chain-of-thought to guide\nthe retrieval process and refines the CoT with the obtained\nretrieval results. ToC [57] creates a clarification tree that\nsystematically optimizes the ambiguous parts in the Query. It\ncan be particularly useful in complex search scenarios where\nthe user’s needs are not entirely clear from the outset or where\nthe information sought is highly specialized or nuanced. The\nrecursive nature of the process allows for continuous learning\nand adaptation to the user’s requirements, often resulting in\nimproved satisfaction with the search outcomes.\nTo address specific data scenarios, recursive retrieval and\nmulti-hop retrieval techniques are utilized together. Recursive",
+      "the robustness of subsequent answer generation by offering\nadditional contextual references through multiple retrieval\niterations. However, it may be affected by semantic discon-\ntinuity and the accumulation of irrelevant information. ITER-\nRETGEN [14] employs a synergistic approach that lever-\nages “retrieval-enhanced generation” alongside “generation-\nenhanced retrieval” for tasks that necessitate the reproduction\nof specific information. The model harnesses the content\nrequired to address the input task as a contextual basis for\nretrieving pertinent knowledge, which in turn facilitates the\ngeneration of improved responses in subsequent iterations.\nB. Recursive Retrieval\nRecursive retrieval is often used in information retrieval and\nNLP to improve the depth and relevance of search results.\nThe process involves iteratively refining search queries based\non the results obtained from previous searches. Recursive\nRetrieval aims to enhance the search experience by gradu-",
+      "12\nprobability of generated terms [24]. When the probability falls\nbelow a certain threshold would activates the retrieval system\nto collect relevant information, thus optimizing the retrieval\ncycle. Self-RAG [25] introduces “reflection tokens” that allow\nthe model to introspect its outputs. These tokens come in\ntwo varieties: “retrieve” and “critic”. The model autonomously\ndecides when to activate retrieval, or alternatively, a predefined\nthreshold may trigger the process. During retrieval, the gen-\nerator conducts a fragment-level beam search across multiple\nparagraphs to derive the most coherent sequence. Critic scores\nare used to update the subdivision scores, with the flexibility\nto adjust these weights during inference, tailoring the model’s\nbehavior. Self-RAG’s design obviates the need for additional\nclassifiers or reliance on Natural Language Inference (NLI)\nmodels, thus streamlining the decision-making process for\nwhen to engage retrieval mechanisms and improving the",
+      "The goal of optimizing indexing is to enhance the quality of\nthe content being indexed. This involves strategies: enhancing\ndata granularity, optimizing index structures, adding metadata,\nalignment optimization, and mixed retrieval. While the goal\nof query optimization is to make the user’s original question\nclearer and more suitable for the retrieval task. Common\nmethods include query rewriting query transformation, query\nexpansion and other techniques [7], [9]–[11].\nPost-Retrieval Process. Once relevant context is retrieved,\nit’s crucial to integrate it effectively with the query. The main\nmethods in post-retrieval process include rerank chunks and\ncontext compressing. Re-ranking the retrieved information to\nrelocate the most relevant content to the edges of the prompt is\na key strategy. This concept has been implemented in frame-\nworks such as LlamaIndex 2, LangChain3, and HayStack [12].\nFeeding all relevant documents directly into LLMs can lead",
+      "arXiv:2203.08773, 2022.\n[19] X. Li, E. Nie, and S. Liang, “From classification to generation:\nInsights into crosslingual retrieval augmented icl,” arXiv preprint\narXiv:2311.06595, 2023.\n[20] D. Cheng, S. Huang, J. Bi, Y . Zhan, J. Liu, Y . Wang, H. Sun,\nF. Wei, D. Deng, and Q. Zhang, “Uprise: Universal prompt retrieval\nfor improving zero-shot evaluation,” arXiv preprint arXiv:2303.08518,\n2023.\n[21] Z. Dai, V . Y . Zhao, J. Ma, Y . Luan, J. Ni, J. Lu, A. Bakalov, K. Guu,\nK. B. Hall, and M.-W. Chang, “Promptagator: Few-shot dense retrieval\nfrom 8 examples,” arXiv preprint arXiv:2209.11755 , 2022.\n[22] Z. Sun, X. Wang, Y . Tay, Y . Yang, and D. Zhou, “Recitation-augmented\nlanguage models,” arXiv preprint arXiv:2210.01296 , 2022.\n[23] O. Khattab, K. Santhanam, X. L. Li, D. Hall, P. Liang, C. Potts,\nand M. Zaharia, “Demonstrate-search-predict: Composing retrieval\nand language models for knowledge-intensive nlp,” arXiv preprint\narXiv:2212.14024, 2022."
+    ],
+    "ground_truth": "The retrieval stage searches the knowledge base and selects document passages relevant to the user's question.",
+    "faithfulness": 0.75,
+    "answer_relevancy": 0.999999999999971,
+    "sources": [
+      {
+        "source": "rag_survey.pdf",
+        "page": 7
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 10
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 11
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 11
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 11
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 12
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 4
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 17
+      }
+    ]
+  },
+  {
+    "question": "What is the role of the generation stage?",
+    "answer": "The generation stage takes the query and the retrieved documents, combines them into a prompt, and then lets a large language model produce a coherent answer. It can draw on the model’s own knowledge or restrict itself to the supplied documents, and it can incorporate conversational history for multi‑turn dialogue. This stage is responsible for turning the retrieved information into a final, user‑readable response.",
+    "contexts": [
+      "Generation Difficulties. In generating responses, the model\nmay face the issue of hallucination, where it produces con-\ntent not supported by the retrieved context. This phase can\nalso suffer from irrelevance, toxicity, or bias in the outputs,\ndetracting from the quality and reliability of the responses.\nAugmentation Hurdles . Integrating retrieved information\nwith the different task can be challenging, sometimes resulting\nin disjointed or incoherent outputs. The process may also\nencounter redundancy when similar information is retrieved\nfrom multiple sources, leading to repetitive responses. Deter-\nmining the significance and relevance of various passages and\nensuring stylistic and tonal consistency add further complexity.\nFacing complex issues, a single retrieval based on the original\nquery may not suffice to acquire adequate context information.\nMoreover, there’s a concern that generation models might\noverly rely on augmented information, leading to outputs that",
+      "Generation Quality . The assessment of generation quality\ncenters on the generator’s capacity to synthesize coherent and\nrelevant answers from the retrieved context. This evaluation\ncan be categorized based on the content’s objectives: unlabeled\nand labeled content. For unlabeled content, the evaluation\nencompasses the faithfulness, relevance, and non-harmfulness\nof the generated answers. In contrast, for labeled content,\nthe focus is on the accuracy of the information produced by\nthe model [161]. Additionally, both retrieval and generation\nquality assessments can be conducted through manual or\nautomatic evaluation methods [29], [161], [163].\nC. Evaluation Aspects\nContemporary evaluation practices of RAG models empha-\nsize three primary quality scores and four essential abilities,\nwhich collectively inform the evaluation of the two principal\ntargets of the RAG model: retrieval and generation.\n1) Quality Scores: Quality scores include context rele-",
+      "search engine during text generation. It navigates this process\nusing special tokens that facilitate actions such as search\nengine queries, browsing results, and citing references, thereby\nexpanding GPT-3’s capabilities through the use of external\nsearch engines. Flare automates timing retrieval by monitoring\nthe confidence of the generation process, as indicated by the",
+      "20\nplanner for personalized knowledge-grounded dialogue,” arXiv preprint\narXiv:2310.08840, 2023.\n[135] ——, “Large language models as source planner for personal-\nized knowledge-grounded dialogue,” arXiv preprint arXiv:2310.08840,\n2023.\n[136] X. Xu, Z. Gou, W. Wu, Z.-Y . Niu, H. Wu, H. Wang, and S. Wang,\n“Long time no see! open-domain conversation with long-term persona\nmemory,” arXiv preprint arXiv:2203.05797 , 2022.\n[137] T.-H. Wen, M. Gasic, N. Mrksic, L. M. Rojas-Barahona, P.-H.\nSu, S. Ultes, D. Vandyke, and S. Young, “Conditional generation\nand snapshot learning in neural dialogue systems,” arXiv preprint\narXiv:1606.03352, 2016.\n[138] R. He and J. McAuley, “Ups and downs: Modeling the visual evolution\nof fashion trends with one-class collaborative filtering,” in proceedings\nof the 25th international conference on world wide web , 2016, pp.\n507–517.\n[139] S. Li, H. Ji, and J. Han, “Document-level event argument extraction",
+      "Developing Retrieval Augmented Generation\n(RAG) based LLM Systems from PDFs: An\nExperience Report\nAyman Asad Khan\nTampere University\nayman.khan@tuni.fi\nMd T oufique Hasan\nTampere University\nmdtoufique.hasan@tuni.fi\nKai Kristian Kemell\nTampere University\nkai-kristian.kemell@tuni.fi\nJussi Rasku\nTampere University\njussi.rasku@tuni.fi\nPekka Abrahamsson\nTampere University\npekka.abrahamsson@tuni.fi\nAbstract. This paper presents an experience report on the develop-\nment of Retrieval Augmented Generation (RAG) systems using PDF\ndocuments as the primary data source. The RAG architecture combines\ngenerative capabilities of Large Language Models (LLMs) with the preci-\nsion of information retrieval. This approach has the potential to redefine\nhow we interact with and augment both structured and unstructured\nknowledge in generative models to enhance transparency, accuracy and\ncontextuality of responses. The paper details the end-to-end pipeline,",
+      "the robustness of subsequent answer generation by offering\nadditional contextual references through multiple retrieval\niterations. However, it may be affected by semantic discon-\ntinuity and the accumulation of irrelevant information. ITER-\nRETGEN [14] employs a synergistic approach that lever-\nages “retrieval-enhanced generation” alongside “generation-\nenhanced retrieval” for tasks that necessitate the reproduction\nof specific information. The model harnesses the content\nrequired to address the input task as a contextual basis for\nretrieving pertinent knowledge, which in turn facilitates the\ngeneration of improved responses in subsequent iterations.\nB. Recursive Retrieval\nRecursive retrieval is often used in information retrieval and\nNLP to improve the depth and relevance of search results.\nThe process involves iteratively refining search queries based\non the results obtained from previous searches. Recursive\nRetrieval aims to enhance the search experience by gradu-",
+      "language generation models, highlighting the need for further\nresearch and exploration into the robustness of RAG.\nC. Hybrid Approaches\nCombining RAG with fine-tuning is emerging as a leading\nstrategy. Determining the optimal integration of RAG and\nfine-tuning whether sequential, alternating, or through end-to-\nend joint training—and how to harness both parameterized",
+      "Generation. The posed query and selected documents are\nsynthesized into a coherent prompt to which a large language\nmodel is tasked with formulating a response. The model’s\napproach to answering may vary depending on task-specific\ncriteria, allowing it to either draw upon its inherent parametric\nknowledge or restrict its responses to the information con-\ntained within the provided documents. In cases of ongoing\ndialogues, any existing conversational history can be integrated\ninto the prompt, enabling the model to engage in multi-turn\ndialogue interactions effectively.\nHowever, Naive RAG encounters notable drawbacks:\nRetrieval Challenges . The retrieval phase often struggles\nwith precision and recall, leading to the selection of misaligned\nor irrelevant chunks, and the missing of crucial information.\nGeneration Difficulties. In generating responses, the model\nmay face the issue of hallucination, where it produces con-\ntent not supported by the retrieved context. This phase can"
+    ],
+    "ground_truth": "The generation stage provides the original question and retrieved context to a language model, which generates a response.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.6170809778255998,
+    "sources": [
+      {
+        "source": "rag_survey.pdf",
+        "page": 3
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 12
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 11
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 20
+      },
+      {
+        "source": "rag_pdf_implementation.pdf",
+        "page": 1
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 11
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 14
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 3
+      }
+    ]
+  },
+  {
+    "question": "What is faithfulness in RAG evaluation?",
+    "answer": "Faithfulness in RAG evaluation is a quality score that checks whether the generated answer stays true to the retrieved context, ensuring consistency and avoiding contradictions.",
+    "contexts": [
+      "used to evaluate answer quality [26], [32], [52], [78]. Tools\nlike RALLE, designed for the automatic evaluation of RAG\napplications, similarly base their assessments on these task-\nspecific metrics [160]. Despite this, there is a notable paucity\nof research dedicated to evaluating the distinct characteristics\nof RAG models.The main evaluation objectives include:\nRetrieval Quality. Evaluating the retrieval quality is crucial\nfor determining the effectiveness of the context sourced by\nthe retriever component. Standard metrics from the domains\nof search engines, recommendation systems, and information\nretrieval systems are employed to measure the performance of\nthe RAG retrieval module. Metrics such as Hit Rate, MRR, and\nNDCG are commonly utilized for this purpose [161], [162].\nGeneration Quality . The assessment of generation quality\ncenters on the generator’s capacity to synthesize coherent and\nrelevant answers from the retrieved context. This evaluation",
+      "which collectively inform the evaluation of the two principal\ntargets of the RAG model: retrieval and generation.\n1) Quality Scores: Quality scores include context rele-\nvance, answer faithfulness, and answer relevance. These qual-\nity scores evaluate the efficiency of the RAG model from\ndifferent perspectives in the process of information retrieval\nand generation [164]–[166].\nContext Relevance evaluates the precision and specificity\nof the retrieved context, ensuring relevance and minimizing\nprocessing costs associated with extraneous content.\nAnswer Faithfulness ensures that the generated answers\nremain true to the retrieved context, maintaining consistency\nand avoiding contradictions.\nAnswer Relevance requires that the generated answers are\ndirectly pertinent to the posed questions, effectively addressing\nthe core inquiry.\n2) Required Abilities: RAG evaluation also encompasses\nfour abilities indicative of its adaptability and efficiency:",
+      "Generation Quality . The assessment of generation quality\ncenters on the generator’s capacity to synthesize coherent and\nrelevant answers from the retrieved context. This evaluation\ncan be categorized based on the content’s objectives: unlabeled\nand labeled content. For unlabeled content, the evaluation\nencompasses the faithfulness, relevance, and non-harmfulness\nof the generated answers. In contrast, for labeled content,\nthe focus is on the accuracy of the information produced by\nthe model [161]. Additionally, both retrieval and generation\nquality assessments can be conducted through manual or\nautomatic evaluation methods [29], [161], [163].\nC. Evaluation Aspects\nContemporary evaluation practices of RAG models empha-\nsize three primary quality scores and four essential abilities,\nwhich collectively inform the evaluation of the two principal\ntargets of the RAG model: retrieval and generation.\n1) Quality Scores: Quality scores include context rele-",
+      "14\nTABLE III\nSUMMARY OF METRICS APPLICABLE FOR EVALUATION ASPECTS OF RAG\nContext\nRelevance Faithfulness AnswerRelevance NoiseRobustness NegativeRejection InformationIntegration CounterfactualRobustness\nAccuracy ✓ ✓ ✓ ✓ ✓ ✓ ✓\nEM ✓\nRecall ✓\nPrecision ✓ ✓\nR-Rate ✓\nCosine Similarity ✓\nHit Rate ✓\nMRR ✓\nNDCG ✓\nBLEU ✓ ✓ ✓\nROUGE/ROUGE-L ✓ ✓ ✓\nThe specific metrics for each evaluation aspect are sum-\nmarized in Table III. It is essential to recognize that these\nmetrics, derived from related work, are traditional measures\nand do not yet represent a mature or standardized approach for\nquantifying RAG evaluation aspects. Custom metrics tailored\nto the nuances of RAG models, though not included here, have\nalso been developed in some evaluation studies.\nD. Evaluation Benchmarks and Tools\nA series of benchmark tests and tools have been proposed\nto facilitate the evaluation of RAG.These instruments furnish\nquantitative metrics that not only gauge RAG model perfor-",
+      "https://www.deepset.ai/blog/rag-evaluation-retrieval, 2023.\n[163] Q. Leng, K. Uhlenhuth, and A. Polyzotis, “Best practices for\nllm evaluation of rag applications,” https://www.databricks.com/blog/\nLLM-auto-eval-best-practices-RAG, 2023.\n[164] S. Es, J. James, L. Espinosa-Anke, and S. Schockaert, “Ragas: Au-\ntomated evaluation of retrieval augmented generation,” arXiv preprint\narXiv:2309.15217, 2023.\n[165] J. Saad-Falcon, O. Khattab, C. Potts, and M. Zaharia, “Ares: An\nautomated evaluation framework for retrieval-augmented generation\nsystems,” arXiv preprint arXiv:2311.09476 , 2023.\n[166] C. Jarvis and J. Allard, “A survey of techniques for\nmaximizing llm performance,” https://community.openai.\ncom/t/openai-dev-day-2023-breakout-sessions/505213#\na-survey-of-techniques-for-maximizing-llm-performance-2, 2023.\n[167] J. Chen, H. Lin, X. Han, and L. Sun, “Benchmarking large lan-\nguage models in retrieval-augmented generation,” arXiv preprint\narXiv:2309.01431, 2023.",
+      "to the user’s query. These articles, combined with the original\nquestion, form a comprehensive prompt that empowers LLMs\nto generate a well-informed answer.\nThe RAG research paradigm is continuously evolving, and\nwe categorize it into three stages: Naive RAG, Advanced\nRAG, and Modular RAG, as showed in Figure 3. Despite\nRAG method are cost-effective and surpass the performance\nof the native LLM, they also exhibit several limitations.\nThe development of Advanced RAG and Modular RAG is\na response to these specific shortcomings in Naive RAG.\nA. Naive RAG\nThe Naive RAG research paradigm represents the earli-\nest methodology, which gained prominence shortly after the",
+      "[167] J. Chen, H. Lin, X. Han, and L. Sun, “Benchmarking large lan-\nguage models in retrieval-augmented generation,” arXiv preprint\narXiv:2309.01431, 2023.\n[168] Y . Liu, L. Huang, S. Li, S. Chen, H. Zhou, F. Meng, J. Zhou, and\nX. Sun, “Recall: A benchmark for llms robustness against external\ncounterfactual knowledge,” arXiv preprint arXiv:2311.08147 , 2023.\n[169] Y . Lyu, Z. Li, S. Niu, F. Xiong, B. Tang, W. Wang, H. Wu, H. Liu,\nT. Xu, and E. Chen, “Crud-rag: A comprehensive chinese benchmark\nfor retrieval-augmented generation of large language models,” arXiv\npreprint arXiv:2401.17043, 2024.\n[170] P. Xu, W. Ping, X. Wu, L. McAfee, C. Zhu, Z. Liu, S. Subramanian,\nE. Bakhturina, M. Shoeybi, and B. Catanzaro, “Retrieval meets long\ncontext large language models,” arXiv preprint arXiv:2310.03025 ,\n2023.\n[171] C. Packer, V . Fang, S. G. Patil, K. Lin, S. Wooders, and J. E. Gon-\nzalez, “Memgpt: Towards llms as operating systems,” arXiv preprint\narXiv:2310.08560, 2023.",
+      "1\nRetrieval-Augmented Generation for Large\nLanguage Models: A Survey\nYunfan Gaoa, Yun Xiong b, Xinyu Gao b, Kangxiang Jia b, Jinliu Pan b, Yuxi Bi c, Yi Dai a, Jiawei Sun a, Meng\nWangc, and Haofen Wang a,c\naShanghai Research Institute for Intelligent Autonomous Systems, Tongji University\nbShanghai Key Laboratory of Data Science, School of Computer Science, Fudan University\ncCollege of Design and Innovation, Tongji University\nAbstract—Large Language Models (LLMs) showcase impres-\nsive capabilities but encounter challenges like hallucination,\noutdated knowledge, and non-transparent, untraceable reasoning\nprocesses. Retrieval-Augmented Generation (RAG) has emerged\nas a promising solution by incorporating knowledge from external\ndatabases. This enhances the accuracy and credibility of the\ngeneration, particularly for knowledge-intensive tasks, and allows\nfor continuous knowledge updates and integration of domain-\nspecific information. RAG synergistically merges LLMs’ intrin-"
+    ],
+    "ground_truth": "Faithfulness measures whether the generated answer is supported by the retrieved context.",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.9759827156689113,
+    "sources": [
+      {
+        "source": "rag_survey.pdf",
+        "page": 12
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 12
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 12
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 14
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 20
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 2
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 20
+      },
+      {
+        "source": "rag_survey.pdf",
+        "page": 1
+      }
+    ]
+  }
+]

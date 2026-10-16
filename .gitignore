@@ -36,4 +36,5 @@ evaluation_results.json
 
 
 # Source documents (keep local unless redistribution is permitted)
-documents/
+documents/*
+!documents/README.md
