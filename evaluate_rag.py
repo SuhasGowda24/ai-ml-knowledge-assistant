@@ -46,12 +46,12 @@ def main():
         )
 
     ragas_llm = llm_factory(
-        "openai/gpt-oss-120b",
+        "openai/gpt-oss-20b",
         provider="openai",
         client=groq_openai_client,
         adapter="instructor",
         temperature=0.0,
-        max_tokens=2048,
+        max_tokens=4096,
     )
 
     # Use the same local embedding model for evaluation.
@@ -93,14 +93,19 @@ def main():
         print(f"\nEvaluating question {index + 1}/{len(dataset)}")
         print(f"Question: {question}")
 
-        answer, sources = ask_question(question, vectorstore, llm)
+        
+        try:
+            answer, sources, contexts = ask_question(
+                question,
+                vectorstore,
+                llm,
+                return_contexts=True,
+            )
+        except Exception as error:
+            print(f"Answer generation failed: {error}")
+            print("Stopping evaluation safely.")
+            break
 
-        documents = vectorstore.similarity_search(question, k=8)
-        contexts = [
-            doc.page_content.strip()
-            for doc in documents
-            if doc.page_content.strip()
-        ]
 
         faithfulness_score = None
         relevancy_score = None
