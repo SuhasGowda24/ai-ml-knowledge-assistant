@@ -145,21 +145,17 @@ GROQ_API_KEY=your_groq_api_key_here
 
 Replace the placeholder with your own API key. Never publish your actual API key or commit the `.env` file to GitHub.
 
-### 5. Add research documents
+5. Source Documents
 
-Create the `documents/` directory if necessary and place the permitted PDF documents inside it.
+The documents/ directory contains the research PDFs used as the knowledge source for DocuMind AI.
 
-The source PDFs are not necessarily included in the GitHub repository. Obtain the documents separately if you do not already have them.
+If the PDFs are included in the repository, they will be available after cloning. Otherwise, place your permitted PDF documents in the documents/ directory before building the knowledge base.
 
-### 6. Build the vector database
+6. Build the Vector Database
 
-```bash
 python build_vectorstore.py
-```
 
-This processes the available PDFs, creates document embeddings, and builds the ChromaDB vector store used by the application.
-
-Run this step again whenever you need to rebuild the knowledge base after changing the source documents or indexing configuration.
+This extracts and processes the PDF content, generates embeddings, and builds the local ChromaDB vector store.
 
 ### 7. Launch the application
 
