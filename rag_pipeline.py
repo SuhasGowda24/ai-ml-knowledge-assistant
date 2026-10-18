@@ -18,6 +18,7 @@ COLLECTION_NAME = "ai_ml_knowledge"
 load_dotenv(PROJECT_DIR / ".env")
 
 
+
 def create_rag_components():
     """Initialize the embedding model, vector store, and LLM."""
 
@@ -28,19 +29,26 @@ def create_rag_components():
             "GROQ_API_KEY was not found. Check your project's .env file."
         )
 
-    if not VECTORSTORE_DIR.exists():
+    # Build the vector store automatically if it is missing
+    if not (VECTORSTORE_DIR / "chroma.sqlite3").exists():
+        from build_vectorstore import build_vectorstore
+
+        build_vectorstore()
+
+    if not (VECTORSTORE_DIR / "chroma.sqlite3").exists():
         raise FileNotFoundError(
-            "Vector store not found. Run build_vectorstore.py first."
+            "Vector store could not be created. Check that PDFs exist "
+            "in the documents folder and contain extractable text."
         )
 
-    # Use the same embedding model used to build the index
+    # Initialize the embedding model
     embeddings = HuggingFaceEmbeddings(
         model_name="sentence-transformers/all-MiniLM-L6-v2",
         model_kwargs={"device": "cpu"},
         encode_kwargs={"normalize_embeddings": True},
     )
 
-    # Connect to the existing ChromaDB index
+    # Connect to the ChromaDB index
     vectorstore = Chroma(
         collection_name=COLLECTION_NAME,
         embedding_function=embeddings,
