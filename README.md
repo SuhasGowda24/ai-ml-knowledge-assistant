@@ -1,6 +1,15 @@
 # 🤖 DocuMind AI: RAG-Based Document Question Answering System
 
+
+## 🚀 Live Demo
+
+**Try DocuMind AI:** [Open the deployed application](https://ai-ml-knowledge-assistant-csaaac5cj8sva59rz9mhyp.streamlit.app/)
+
+Ask questions about the uploaded AI and Machine Learning research PDFs and explore source references in the generated answers.
+
+
 An AI-powered document question-answering application that uses **Retrieval-Augmented Generation (RAG)** to answer questions from research PDFs using retrieved document context.
+
 
 ## 📌 Overview
 
