@@ -191,9 +191,9 @@ The project uses RAGAS to evaluate answer quality with two metrics.
 
 | Metric | Score |
 |---|---:|
-| Average Faithfulness | 0.9458 |
-| Average Answer Relevancy | 0.8757 |
-| Evaluation questions | 10 |
+| Average Faithfulness | 0.9471 |
+| Average Answer Relevancy | 0.7257 |
+| Evaluation Questions | 10 |
 
 **Evaluation note:** These are preliminary results, not a fully controlled single-model evaluation. The first eight questions were evaluated using `openai/gpt-oss-120b`, while the final two were evaluated using `openai/gpt-oss-20b` after API quota limitations interrupted the original run.
 
